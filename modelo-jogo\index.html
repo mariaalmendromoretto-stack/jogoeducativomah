@@ -1,48 +1,102 @@
-<!doctype html>
-<html lang="pt-BR" data-theme="light">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="light dark" />
-    <title>Modelo de Jogo — Jogos VR</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="app">
-      <header class="top">
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fórmula Secreta - Laboratório do X</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="laboratorio-container" aria-live="polite">
+    <!-- Cabeçalho com título, tema e barra de informações -->
+    <header class="cabecalho">
+      <div class="titulo-area">
+        <span class="icone-lab" aria-hidden="true">🧪</span>
         <div>
-          <span class="kicker">Modelo</span>
-          <h1 id="title">Clique no Alvo</h1>
-          <p class="subtitle">Troque este jogo pelo seu. O contrato já está pronto.</p>
+          <h1>Fórmula Secreta</h1>
+          <p class="subtitulo">Descubra o valor de <strong>x</strong> para estabilizar a mistura</p>
         </div>
-        <button id="restart" class="btn" type="button">Reiniciar</button>
-      </header>
-
-      <main>
-        <div class="hud">
-          <span class="pill">Alvos: <strong id="score">0</strong>/<span id="total">10</span></span>
-          <span class="pill">Tempo: <strong id="timer">0,0s</strong></span>
-        </div>
-
-        <div id="board" class="board" aria-label="Área do jogo">
-          <p id="start-hint" class="start-hint">Clique no alvo para começar</p>
-        </div>
-      </main>
-
-      <footer class="bottom">
-        <p>Este é o arquivo <code>game.js</code>. Leia os comentários e adapte.</p>
-      </footer>
-    </div>
-
-    <div id="result" class="overlay" hidden>
-      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="result-title">
-        <div class="modal-icon" aria-hidden="true">🎯</div>
-        <h2 id="result-title">Muito bem!</h2>
-        <p id="result-text">Você concluiu o jogo.</p>
-        <button id="play-again" class="btn btn-primary full" type="button">Jogar de novo</button>
       </div>
-    </div>
 
-    <script src="game.js"></script>
-  </body>
+      <button id="btn-tema" class="btn-secundario" type="button" aria-label="Alternar tema claro e escuro">
+        🌓 Tema
+      </button>
+    </header>
+
+    <!-- Painel de status: rodada, pontos e vidas -->
+    <section class="painel-status" aria-label="Status da partida">
+      <div class="status-item">
+        <span class="rotulo">Rodada</span>
+        <strong id="texto-rodada">1 / 6</strong>
+      </div>
+      <div class="status-item">
+        <span class="rotulo">Pontos</span>
+        <strong id="texto-pontos">0</strong>
+      </div>
+      <div class="status-item">
+        <span class="rotulo">Vidas</span>
+        <strong id="texto-vidas" aria-label="3 vidas restantes">❤️❤️❤️</strong>
+      </div>
+    </section>
+
+    <!-- Tela Inicial -->
+    <section id="tela-inicio" class="cartao tela ativa">
+      <div class="frasco-animado" aria-hidden="true">⚗️</div>
+      <h2>Bem-vindo ao Laboratório!</h2>
+      <p>
+        Cada cápsula contém uma equação do 1º grau. Calcule o valor de <strong>x</strong> 
+        e escolha a resposta certa antes que as 3 vidas acabem.
+      </p>
+      <ul class="regras-rapidas">
+        <li>6 rodadas com dificuldade crescente</li>
+        <li>Cada acerto vale 100 pontos</li>
+        <li>Você tem 3 vidas de proteção</li>
+      </ul>
+      <button id="btn-iniciar" class="btn-principal" type="button">Iniciar Experimento</button>
+    </section>
+
+    <!-- Tela Principal do Jogo -->
+    <section id="tela-jogo" class="cartao tela" hidden>
+      <div class="nivel-badge" id="texto-nivel">Nível 1: Aquecimento</div>
+      
+      <div class="visor-equacao" role="region" aria-label="Equação atual">
+        <span class="visor-etiqueta">FÓRMULA ATUAL</span>
+        <div id="texto-equacao" class="equacao">x + 5 = 12</div>
+      </div>
+
+      <p class="instrucao-escolha">Qual é o valor de <strong>x</strong>?</p>
+
+      <!-- Botões de resposta preenchidos pelo JavaScript -->
+      <div id="grade-opcoes" class="grade-opcoes" role="group" aria-label="Opções de resposta"></div>
+
+      <!-- Caixa de explicação após cada jogada -->
+      <div id="caixa-feedback" class="feedback" hidden>
+        <p id="texto-feedback"></p>
+        <button id="btn-proxima" class="btn-principal" type="button">Próxima Fórmula ➔</button>
+      </div>
+    </section>
+
+    <!-- Tela Final -->
+    <section id="tela-fim" class="cartao tela" hidden>
+      <div id="icone-final" class="frasco-animado" aria-hidden="true">🏆</div>
+      <h2 id="titulo-final">Experimento Concluído!</h2>
+      <p id="mensagem-final">Você estabilizou todas as fórmulas do laboratório.</p>
+      
+      <div class="resumo-final">
+        <div class="resumo-dado">
+          <span>Pontuação Final</span>
+          <strong id="final-pontos">0</strong>
+        </div>
+        <div class="resumo-dado">
+          <span>Tempo Total</span>
+          <strong id="final-tempo">0s</strong>
+        </div>
+      </div>
+
+      <button id="btn-reiniciar" class="btn-principal" type="button">Jogar Novamente</button>
+    </section>
+  </main>
+
+  <script src="game.js"></script>
+</body>
 </html>

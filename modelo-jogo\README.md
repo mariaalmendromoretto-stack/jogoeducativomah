@@ -1,22 +1,25 @@
-# Modelo de jogo
+# 🧪 Fórmula Secreta
 
-Esta pasta é o ponto de partida. Ela já tem um jogo funcionando: clique no alvo.
+Jogo educacional de **Matemática** desenvolvido para treinar a resolução de **equações do 1º grau** (descobrir o valor de $x$) em um laboratório de ciências.
 
-## Como usar
+## 🎯 Objetivo de aprendizagem
+Ajudar estudantes do Ensino Fundamental 2 a praticar o raciocínio algébrico para isolar a incógnita $x$ em equações simples e intermediárias, entendendo o passo a passo de cada conta.
 
-1. Copie esta pasta (`modelo-jogo`) para `public/games/` e renomeie com o nome do seu jogo.
-   O nome da pasta deve ser igual ao `slug` do `manifest.json`.
-2. Abra `index.html` no navegador para testar.
-3. Edite `game.js` e `style.css` à vontade.
-4. Troque a capa `cover.svg` por uma imagem 16:9 (pode ser `.png` ou `.jpg`).
-5. Preencha o `manifest.json` com seus dados.
-6. Teste no celular e no computador.
-7. Compacte a pasta em `.zip` e entregue ao professor.
+## 🕹️ Como jogar
+1. Clique em **Iniciar Experimento**.
+2. Observe a equação exibida no visor do laboratório.
+3. Toque ou clique no botão com o valor correto de **$x$**.
+4. Cada acerto vale **100 pontos**. Se errar, você perde **1 vida** (são 3 vidas no total) e vê uma explicação curta do cálculo certo.
+5. Complete as **6 rodadas** para estabilizar todas as fórmulas!
 
-## O que não pode faltar
+## 📂 Arquivos do projeto
+- `index.html`: estrutura das telas e botões do jogo.
+- `style.css`: visual de laboratório, tema claro/escuro e botões adaptados para celular e computador.
+- `game.js`: lógica das 6 rodadas, pontuação, vidas e comunicação com o portal.
+- `manifest.json`: ficha técnica do jogo para o portal escolar.
+- `cover.svg`: imagem de capa do projeto.
 
-- `window.parent.postMessage({ type: "vrgame:ready" }, "*")` quando o jogo carregar.
-- `window.parent.postMessage({ type: "vrgame:finish", score, maxScore, timeMs }, "*")` no final.
-- Nada de link externo, biblioteca da internet ou coleta de dados.
-
-O contrato completo está em `docs/CONTRATO.md`.
+## 👩‍💻 Autoria
+- **Autora:** Maria Eduarda
+- **Turma:** 9º C
+- **Disciplina:** Matemática
